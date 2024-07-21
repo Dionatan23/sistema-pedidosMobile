@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StackParams } from "../../routes/app.routes";
 import { AuthContext } from "../../contexts/AuthContext";
+import { api } from "../../services/api";
 
 export default function Dashboard() {
   const navigation = useNavigation<NativeStackNavigationProp<StackParams>>();
@@ -23,9 +24,12 @@ export default function Dashboard() {
       return;
     }
 
-    //Precisa fazer a chamada para o backend, e abrir a mesa e navegar para proxima tela.
+    const response = await api.post("/order", {
+      table: Number(number),
+    });
 
-    navigation.navigate("Order", {number: number, order_id: "cda7bff9-d644-43fc-bc4f-0be228c414e1"})
+    navigation.navigate("Order", {number: number, order_id: response.data.id})
+    setNumber("");
   }
 
   return (

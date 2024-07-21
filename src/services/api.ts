@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://sistema-pedido-back-end.vercel.app/"
+    baseURL: "http://192.168.1.15:3333/"
 });
 
 export { api };
